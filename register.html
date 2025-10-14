@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация | Книжный магазин</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">Книжный уголок</div>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="nav-link">Главная</a></li>
+                    <li><a href="catalog.html" class="nav-link">Каталог</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a href="login.html" class="btn btn-login">Вход</a>
+                <a href="register.html" class="btn btn-register active">Регистрация</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Страница регистрации -->
+    <main>
+        <section class="auth-section">
+            <div class="container">
+                <div class="auth-container">
+                    <h2 class="auth-title">Регистрация</h2>
+                    <form id="register-form">
+                        <div class="form-group">
+                            <label class="form-label" for="register-name">Имя</label>
+                            <input type="text" class="form-input" id="register-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="register-email">Email</label>
+                            <input type="email" class="form-input" id="register-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="register-password">Пароль</label>
+                            <input type="password" class="form-input" id="register-password" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="register-confirm">Подтвердите пароль</label>
+                            <input type="password" class="form-input" id="register-confirm" required>
+                        </div>
+                        <button type="submit" class="btn btn-submit">Зарегистрироваться</button>
+                    </form>
+                    <div class="auth-link">
+                        <p>Уже есть аккаунт? <a href="login.html">Войти</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Подвал -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Книжный уголок</h3>
+                    <p>Ваш надежный партнер в мире литературы с 2010 года.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Категории</h3>
+                    <ul>
+                        <li><a href="catalog.html">Художественная литература</a></li>
+                        <li><a href="catalog.html">Научная фантастика</a></li>
+                        <li><a href="catalog.html">Детективы</a></li>
+                        <li><a href="catalog.html">Фэнтези</a></li>
+                        <li><a href="catalog.html">Бизнес-литература</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Помощь</h3>
+                    <ul>
+                        <li><a href="#">Доставка и оплата</a></li>
+                        <li><a href="#">Возврат товара</a></li>
+                        <li><a href="#">Частые вопросы</a></li>
+                        <li><a href="#">Контакты</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Контакты</h3>
+                    <ul>
+                        <li>Телефон: +7 (999) 123-45-67</li>
+                        <li>Email: info@bookcorner.ru</li>
+                        <li>Адрес: г. Москва, ул. Книжная, д. 15</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Книжный уголок. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

@@ -173,9 +173,17 @@
         }
 
         .book-image {
-            font-size: 4rem;
             margin-bottom: 15px;
-            color: #8d6e63;
+            text-align: center;
+        }
+
+        .book-cover {
+            width: 100%;
+            max-width: 200px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
         .book-info h4 {
@@ -242,6 +250,20 @@
             margin-top: auto;
         }
 
+        /* Стили для случаев, когда картинки не загружаются */
+        .book-placeholder {
+            width: 200px;
+            height: 300px;
+            background: #efebe9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            margin: 0 auto;
+            color: #8d6e63;
+            font-size: 3rem;
+        }
+
         @media (max-width: 768px) {
             .main-nav {
                 flex-wrap: wrap;
@@ -266,6 +288,11 @@
             .filter-select {
                 min-width: 150px;
                 flex: 1;
+            }
+            
+            .book-cover {
+                max-width: 150px;
+                height: 225px;
             }
         }
     </style>
@@ -341,7 +368,8 @@
                 price: 650,
                 category: "fiction",
                 rating: 4.8,
-                reviews: 127
+                reviews: 127,
+                image: "images/мастеримаргарита.webp"
             },
             {
                 id: 2,
@@ -350,7 +378,8 @@
                 price: 580,
                 category: "scifi",
                 rating: 4.7,
-                reviews: 89
+                reviews: 89,
+                image: "images/1984.jpg"
             },
             {
                 id: 3,
@@ -359,7 +388,8 @@
                 price: 720,
                 category: "fiction",
                 rating: 4.9,
-                reviews: 156
+                reviews: 156,
+                image: "images/преступлениеинаказание.png"
             },
             {
                 id: 4,
@@ -368,26 +398,20 @@
                 price: 450,
                 category: "fiction",
                 rating: 4.8,
-                reviews: 203
+                reviews: 203,
+                image: "images/маленькийпринц.webp"
             },
             {
                 id: 5,
-                title: "Гарри Поттер и философский камень",
-                author: "Дж. К. Роулинг",
-                price: 890,
-                category: "fantasy",
-                rating: 4.9,
-                reviews: 345
+                title: "Если все кошки в мире исчезнут",
+                author: "Гэнки Кавамура",
+                price: 520,
+                category: "romance",
+                rating: 4.6,
+                reviews: 94,
+                image: "images/есливсекошкивмиреисчезнут.webp.png"
             },
-            {
-                id: 6,
-                title: "Властелин колец: Братство кольца",
-                author: "Дж. Р. Р. Толкин",
-                price: 950,
-                category: "fantasy",
-                rating: 4.8,
-                reviews: 278
-            }
+        
         ];
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -404,19 +428,26 @@
                 tag.addEventListener('click', function() {
                     document.querySelectorAll('.category-tag').forEach(t => t.classList.remove('active'));
                     this.classList.add('active');
+                    filterBooks();
                 });
+            });
+
+            document.querySelectorAll('.filter-select').forEach(select => {
+                select.addEventListener('change', sortBooks);
             });
         });
 
-        function loadBooks() {
+        function loadBooks(booksToLoad = books) {
             const booksGrid = document.getElementById('booksGrid');
             booksGrid.innerHTML = '';
             
-            books.forEach(book => {
+            booksToLoad.forEach(book => {
                 const bookCard = document.createElement('div');
                 bookCard.className = 'book-card';
                 bookCard.innerHTML = `
-                    <div class="book-image">📖</div>
+                    <div class="book-image">
+                        <img src="${book.image}" alt="${book.title}" class="book-cover">
+                    </div>
                     <div class="book-info">
                         <h4>${book.title}</h4>
                         <p>${book.author}</p>
@@ -430,6 +461,78 @@
                 `;
                 booksGrid.appendChild(bookCard);
             });
+
+            // Добавляем обработчики для новых кнопок
+            document.querySelectorAll('.btn-cart').forEach(button => {
+                button.addEventListener('click', function() {
+                    const bookTitle = this.closest('.book-card').querySelector('h4').textContent;
+                    alert(`Книга "${bookTitle}" добавлена в корзину!`);
+                    
+                    // Анимация кнопки
+                    const originalText = this.textContent;
+                    this.textContent = 'Добавлено!';
+                    this.style.background = '#27ae60';
+                    
+                    setTimeout(() => {
+                        this.textContent = originalText;
+                        this.style.background = '';
+                    }, 2000);
+                });
+            });
+
+            // Обработка ошибок загрузки картинок
+            document.querySelectorAll('.book-cover').forEach(img => {
+                img.addEventListener('error', function() {
+                    console.log('Ошибка загрузки картинки:', this.src);
+                    const placeholder = document.createElement('div');
+                    placeholder.className = 'book-placeholder';
+                    placeholder.innerHTML = '📖';
+                    this.parentNode.replaceChild(placeholder, this);
+                });
+            });
+        }
+
+        function filterBooks() {
+            const activeCategory = document.querySelector('.category-tag.active').textContent;
+            
+            if (activeCategory === 'Все книги') {
+                loadCatalogBooks(books);
+            } else {
+                const filteredBooks = books.filter(book => {
+                    const categoryMap = {
+                        'Художественная литература': 'fiction',
+                        'Фэнтези': 'fantasy',
+                        'Детективы': 'detective',
+                        'Научная фантастика': 'scifi',
+                        'Романы': 'romance',
+                        'Бизнес-литература': 'business'
+                    };
+                    return book.category === categoryMap[activeCategory];
+                });
+                loadBooks(filteredBooks);
+            }
+        }
+
+        function sortBooks() {
+            const sortBy = document.querySelectorAll('.filter-select')[1].value;
+            let sortedBooks = [...books];
+            
+            switch (sortBy) {
+                case 'По цене (возрастание)':
+                    sortedBooks.sort((a, b) => a.price - b.price);
+                    break;
+                case 'По цене (убывание)':
+                    sortedBooks.sort((a, b) => b.price - a.price);
+                    break;
+                case 'По названию':
+                    sortedBooks.sort((a, b) => a.title.localeCompare(b.title));
+                    break;
+                default:
+                    // По популярности (рейтинг + отзывы)
+                    sortedBooks.sort((a, b) => (b.rating * b.reviews) - (a.rating * a.reviews));
+            }
+            
+            loadBooks(sortedBooks);
         }
     </script>
 </body>

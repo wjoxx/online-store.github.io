@@ -1,98 +1,112 @@
-// Данные книг для каталога
+// Данные книг
 const books = [
     {
         id: 1,
         title: "Мастер и Маргарита",
         author: "Михаил Булгаков",
         price: 650,
-        genre: "fiction",
-        image: "📖"
+        category: "fiction",
+        rating: 4.8,
+        reviews: 127
     },
     {
         id: 2,
         title: "1984",
         author: "Джордж Оруэлл",
         price: 580,
-        genre: "scifi",
-        image: "📖"
+        category: "scifi",
+        rating: 4.7,
+        reviews: 89
     },
     {
         id: 3,
         title: "Преступление и наказание",
         author: "Фёдор Достоевский",
         price: 720,
-        genre: "fiction",
-        image: "📖"
+        category: "fiction",
+        rating: 4.9,
+        reviews: 156
     },
     {
         id: 4,
         title: "Маленький принц",
         author: "Антуан де Сент-Экзюпери",
         price: 450,
-        genre: "fiction",
-        image: "📖"
+        category: "fiction",
+        rating: 4.8,
+        reviews: 203
     },
     {
         id: 5,
         title: "Гарри Поттер и философский камень",
         author: "Дж. К. Роулинг",
         price: 890,
-        genre: "fantasy",
-        image: "📖"
+        category: "fantasy",
+        rating: 4.9,
+        reviews: 345
     },
     {
         id: 6,
         title: "Властелин колец: Братство кольца",
         author: "Дж. Р. Р. Толкин",
         price: 950,
-        genre: "fantasy",
-        image: "📖"
+        category: "fantasy",
+        rating: 4.8,
+        reviews: 278
     },
     {
         id: 7,
         title: "Убийство в Восточном экспрессе",
         author: "Агата Кристи",
         price: 520,
-        genre: "detective",
-        image: "📖"
+        category: "detective",
+        rating: 4.6,
+        reviews: 94
     },
     {
         id: 8,
         title: "Гордость и предубеждение",
         author: "Джейн Остин",
         price: 480,
-        genre: "romance",
-        image: "📖"
+        category: "romance",
+        rating: 4.7,
+        reviews: 167
     }
 ];
 
 // Инициализация при загрузке страницы
 document.addEventListener('DOMContentLoaded', function() {
-    // Загрузка каталога книг если находимся на странице каталога
-    if (document.getElementById('books-grid')) {
-        loadBooks(books);
-        setupFilters();
+    // Загрузка каталога книг
+    if (document.querySelector('.catalog-grid')) {
+        loadCatalogBooks();
+        setupCatalogFilters();
     }
     
-    // Обработка формы входа
-    const loginForm = document.getElementById('login-form');
+    // Обработка форм
+    const loginForm = document.getElementById('loginForm');
     if (loginForm) {
         loginForm.addEventListener('submit', handleLogin);
     }
     
-    // Обработка формы регистрации
-    const registerForm = document.getElementById('register-form');
+    const registerForm = document.getElementById('registerForm');
     if (registerForm) {
         registerForm.addEventListener('submit', handleRegister);
     }
     
-    // Настройка активных ссылок в навигации
-    setupActiveNavLinks();
+    // Обработка кнопок "В корзину"
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('btn-cart')) {
+            e.preventDefault();
+            const bookCard = e.target.closest('.book-card');
+            const bookTitle = bookCard.querySelector('h4').textContent;
+            addToCart(bookTitle);
+        }
+    });
 });
 
 // Загрузка книг в каталог
-function loadBooks(booksToLoad) {
-    const booksGrid = document.getElementById('books-grid');
+function loadCatalogBooks(booksToLoad = books) {
+    const booksGrid = document.querySelector('.catalog-grid');
     if (!booksGrid) return;
     
     booksGrid.innerHTML = '';
@@ -101,128 +115,130 @@ function loadBooks(booksToLoad) {
         const bookCard = document.createElement('div');
         bookCard.className = 'book-card';
         bookCard.innerHTML = `
-            <div class="book-image">${book.image}</div>
+            <div class="book-image">📖</div>
             <div class="book-info">
-                <h3 class="book-title">${book.title}</h3>
-                <p class="book-author">${book.author}</p>
-                <div class="book-price">${book.price} руб.</div>
-                <button class="btn btn-buy" data-book-id="${book.id}">В корзину</button>
+                <h4>${book.title}</h4>
+                <p>${book.author}</p>
+                <div class="rating">
+                    <span>★ ${book.rating}</span>
+                    <span>(${book.reviews} отзывов)</span>
+                </div>
+                <div class="price">${book.price} ₽</div>
+                <button class="btn btn-cart">В корзину</button>
             </div>
         `;
         booksGrid.appendChild(bookCard);
     });
-    
-    // Добавляем обработчики для кнопок "В корзину"
-    document.querySelectorAll('.btn-buy').forEach(button => {
-        button.addEventListener('click', function() {
-            const bookId = this.getAttribute('data-book-id');
-            const book = books.find(b => b.id == bookId);
-            if (book) {
-                addToCart(book);
-            }
-        });
-    });
 }
 
-// Настройка фильтров
-function setupFilters() {
-    const searchBox = document.querySelector('.search-box');
-    const genreFilter = document.getElementById('genre-filter');
-    const priceFilter = document.getElementById('price-filter');
+// Настройка фильтров каталога
+function setupCatalogFilters() {
+    const categoryTags = document.querySelectorAll('.category-tag');
+    const sortSelect = document.querySelector('.filter-select');
     
-    if (searchBox) {
-        searchBox.addEventListener('input', filterBooks);
-    }
-    if (genreFilter) {
-        genreFilter.addEventListener('change', filterBooks);
-    }
-    if (priceFilter) {
-        priceFilter.addEventListener('change', filterBooks);
+    categoryTags.forEach(tag => {
+        tag.addEventListener('click', function() {
+            categoryTags.forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+            filterBooks();
+        });
+    });
+    
+    if (sortSelect) {
+        sortSelect.addEventListener('change', sortBooks);
     }
 }
 
 // Фильтрация книг
 function filterBooks() {
-    const searchTerm = document.querySelector('.search-box').value.toLowerCase();
-    const genre = document.getElementById('genre-filter').value;
-    const priceRange = document.getElementById('price-filter').value;
+    const activeCategory = document.querySelector('.category-tag.active').textContent;
     
-    const filteredBooks = books.filter(book => {
-        // Поиск по названию и автору
-        const matchesSearch = book.title.toLowerCase().includes(searchTerm) || 
-                            book.author.toLowerCase().includes(searchTerm);
-        
-        // Фильтр по жанру
-        const matchesGenre = !genre || book.genre === genre;
-        
-        // Фильтр по цене
-        let matchesPrice = true;
-        if (priceRange) {
-            if (priceRange === '0-500') {
-                matchesPrice = book.price <= 500;
-            } else if (priceRange === '500-1000') {
-                matchesPrice = book.price > 500 && book.price <= 1000;
-            } else if (priceRange === '1000+') {
-                matchesPrice = book.price > 1000;
-            }
-        }
-        
-        return matchesSearch && matchesGenre && matchesPrice;
-    });
-    
-    loadBooks(filteredBooks);
-}
-
-// Добавление в корзину
-function addToCart(book) {
-    // В реальном приложении здесь будет логика добавления в корзину
-    // и сохранение в localStorage или отправка на сервер
-    alert(`Книга "${book.title}" добавлена в корзину!`);
-    
-    // Можно добавить анимацию или уведомление
-    const button = document.querySelector(`[data-book-id="${book.id}"]`);
-    if (button) {
-        const originalText = button.textContent;
-        button.textContent = 'Добавлено!';
-        button.style.backgroundColor = '#27ae60';
-        
-        setTimeout(() => {
-            button.textContent = originalText;
-            button.style.backgroundColor = '';
-        }, 2000);
+    if (activeCategory === 'Все книги') {
+        loadCatalogBooks(books);
+    } else {
+        const filteredBooks = books.filter(book => {
+            const categoryMap = {
+                'Художественная литература': 'fiction',
+                'Фэнтези': 'fantasy',
+                'Детективы': 'detective',
+                'Научная фантастика': 'scifi',
+                'Романы': 'romance',
+                'Бизнес-литература': 'business'
+            };
+            return book.category === categoryMap[activeCategory];
+        });
+        loadCatalogBooks(filteredBooks);
     }
 }
 
-// Обработка формы входа
+// Сортировка книг
+function sortBooks() {
+    const sortBy = document.querySelector('.filter-select').value;
+    let sortedBooks = [...books];
+    
+    switch (sortBy) {
+        case 'По цене (возрастание)':
+            sortedBooks.sort((a, b) => a.price - b.price);
+            break;
+        case 'По цене (убывание)':
+            sortedBooks.sort((a, b) => b.price - a.price);
+            break;
+        case 'По названию':
+            sortedBooks.sort((a, b) => a.title.localeCompare(b.title));
+            break;
+        default:
+            // По популярности (рейтинг + отзывы)
+            sortedBooks.sort((a, b) => (b.rating * b.reviews) - (a.rating * a.reviews));
+    }
+    
+    loadCatalogBooks(sortedBooks);
+}
+
+// Добавление в корзину
+function addToCart(bookTitle) {
+    // В реальном приложении здесь будет логика добавления в корзину
+    alert(`Книга "${bookTitle}" добавлена в корзину!`);
+    
+    // Можно добавить анимацию
+    const event = new CustomEvent('cartUpdate', { detail: { book: bookTitle } });
+    document.dispatchEvent(event);
+}
+
+// Обработка входа
 function handleLogin(e) {
     e.preventDefault();
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
     
-    const email = document.getElementById('login-email').value;
-    const password = document.getElementById('login-password').value;
-    
-    // В реальном приложении здесь будет проверка на сервере
     if (email && password) {
         alert('Вход выполнен успешно!');
-        // Перенаправление на главную страницу
+        // В реальном приложении здесь будет перенаправление
         window.location.href = 'index.html';
     } else {
         alert('Пожалуйста, заполните все поля');
     }
 }
 
-// Обработка формы регистрации
+// Обработка регистрации
 function handleRegister(e) {
     e.preventDefault();
+    const email = document.getElementById('reg-email').value;
+    const password = document.getElementById('reg-password').value;
+    const confirm = document.getElementById('reg-confirm').value;
+    const agreement = document.querySelector('#registerForm input[type="checkbox"]').checked;
     
-    const name = document.getElementById('register-name').value;
-    const email = document.getElementById('register-email').value;
-    const password = document.getElementById('register-password').value;
-    const confirmPassword = document.getElementById('register-confirm').value;
+    if (!agreement) {
+        alert('Пожалуйста, примите условия соглашения');
+        return;
+    }
     
-    if (password !== confirmPassword) {
+    if (password !== confirm) {
         alert('Пароли не совпадают!');
         return;
     }
     
-    if (name && email && password) {
-        alert('Регистрация завершена успешно
+    if (email && password) {
+        alert('Регистрация завершена успешно!');
+        window.location.href = 'login.html';
+    }
+}

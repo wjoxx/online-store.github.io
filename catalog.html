@@ -82,34 +82,14 @@
         }
 
         .catalog-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             margin-bottom: 30px;
-            flex-wrap: wrap;
-            gap: 20px;
+            text-align: center;
         }
 
         .catalog-header h2 {
             font-size: 2rem;
             color: #4e342e;
             font-weight: 300;
-        }
-
-        .filters {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .filter-select {
-            padding: 10px 15px;
-            border: 1px solid #d7ccc8;
-            border-radius: 5px;
-            background: white;
-            color: #5d4037;
-            font-size: 0.9rem;
-            min-width: 200px;
         }
 
         .categories {
@@ -121,12 +101,14 @@
             margin-bottom: 15px;
             color: #4e342e;
             font-weight: 400;
+            text-align: center;
         }
 
         .category-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
+            justify-content: center;
         }
 
         .category-tag {
@@ -272,20 +254,6 @@
                 min-width: 120px;
             }
             
-            .catalog-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .filters {
-                width: 100%;
-            }
-            
-            .filter-select {
-                min-width: 150px;
-                flex: 1;
-            }
-            
             .book-cover {
                 max-width: 150px;
                 height: 225px;
@@ -312,23 +280,6 @@
     <main class="container">
         <div class="catalog-header">
             <h2>Каталог книг</h2>
-            <div class="filters">
-                <select class="filter-select">
-                    <option>Все категории</option>
-                    <option>Художественная литература</option>
-                    <option>Фэнтези</option>
-                    <option>Детективы</option>
-                    <option>Научная фантастика</option>
-                    <option>Романы</option>
-                    <option>Бизнес-литература</option>
-                </select>
-                <select class="filter-select">
-                    <option>По популярности</option>
-                    <option>По цене (возрастание)</option>
-                    <option>По цене (убывание)</option>
-                    <option>По названию</option>
-                </select>
-            </div>
         </div>
 
         <div class="categories">
@@ -421,10 +372,6 @@
                     filterBooks();
                 });
             });
-
-            document.querySelectorAll('.filter-select').forEach(select => {
-                select.addEventListener('change', sortBooks);
-            });
         });
 
         function loadBooks(booksToLoad = books) {
@@ -469,18 +416,6 @@
                 });
             });
 
-            // Обработка ошибок загрузки картинок
-            document.querySelectorAll('.book-cover').forEach(img => {
-                img.addEventListener('error', function() {
-                    console.log('Ошибка загрузки картинки:', this.src);
-                    const placeholder = document.createElement('div');
-                    placeholder.className = 'book-placeholder';
-                    placeholder.innerHTML = '📖';
-                    this.parentNode.replaceChild(placeholder, this);
-                });
-            });
-        }
-
         function filterBooks() {
             const activeCategory = document.querySelector('.category-tag.active').textContent;
             
@@ -500,28 +435,6 @@
                 });
                 loadBooks(filteredBooks);
             }
-        }
-
-        function sortBooks() {
-            const sortBy = document.querySelectorAll('.filter-select')[1].value;
-            let sortedBooks = [...books];
-            
-            switch (sortBy) {
-                case 'По цене (возрастание)':
-                    sortedBooks.sort((a, b) => a.price - b.price);
-                    break;
-                case 'По цене (убывание)':
-                    sortedBooks.sort((a, b) => b.price - a.price);
-                    break;
-                case 'По названию':
-                    sortedBooks.sort((a, b) => a.title.localeCompare(b.title));
-                    break;
-                default:
-                    // По популярности (только по рейтингу)
-                    sortedBooks.sort((a, b) => b.rating - a.rating);
-            }
-            
-            loadBooks(sortedBooks);
         }
     </script>
 </body>

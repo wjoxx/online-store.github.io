@@ -163,9 +163,17 @@
         }
 
         .book-image {
-            font-size: 4rem;
             margin-bottom: 15px;
-            color: #8d6e63;
+            text-align: center;
+        }
+
+        .book-cover {
+            width: 100%;
+            max-width: 200px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
         .book-info h4 {
@@ -188,12 +196,34 @@
             margin: 15px 0;
         }
 
+        .popular-books h3 {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #4e342e;
+            font-weight: 300;
+        }
+
         footer {
             background: #5d4037;
             color: #d7ccc8;
             text-align: center;
             padding: 20px 0;
             margin-top: auto;
+        }
+
+        /* Стили для случаев, когда картинки не загружаются */
+        .book-placeholder {
+            width: 200px;
+            height: 300px;
+            background: #efebe9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            margin: 0 auto;
+            color: #8d6e63;
+            font-size: 3rem;
         }
 
         @media (max-width: 768px) {
@@ -214,6 +244,11 @@
             
             .hero p {
                 font-size: 1rem;
+            }
+
+            .book-cover {
+                max-width: 150px;
+                height: 225px;
             }
         }
     </style>
@@ -244,17 +279,24 @@
         <section class="popular-books">
             <h3>Популярные книги</h3>
             <div class="books-grid">
+                <!-- Книга 1 -->
                 <div class="book-card">
                     <div class="book-image">
                         <img src="images/мастеримаргарита.webp" alt="Мастер и Маргарита" class="book-cover">
+                    </div>
+                    <div class="book-info">
                         <h4>Мастер и Маргарита</h4>
                         <p>Михаил Булгаков</p>
                         <div class="price">650 ₽</div>
                         <button class="btn btn-cart">В корзину</button>
                     </div>
                 </div>
+                
+                <!-- Книга 2 -->
                 <div class="book-card">
-                    <div class="book-image">📖</div>
+                    <div class="book-image">
+                        <img src="images/1984.jpg" alt="1984" class="book-cover">
+                    </div>
                     <div class="book-info">
                         <h4>1984</h4>
                         <p>Джордж Оруэлл</p>
@@ -262,8 +304,12 @@
                         <button class="btn btn-cart">В корзину</button>
                     </div>
                 </div>
+                
+                <!-- Книга 3 -->
                 <div class="book-card">
-                    <div class="book-image">📖</div>
+                    <div class="book-image">
+                        <img src="images/преступлениеинаказание.png" alt="Преступление и наказание" class="book-cover">
+                    </div>
                     <div class="book-info">
                         <h4>Преступление и наказание</h4>
                         <p>Фёдор Достоевский</p>
@@ -283,10 +329,32 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Обработка кнопок "В корзину"
             document.querySelectorAll('.btn-cart').forEach(button => {
                 button.addEventListener('click', function() {
                     const bookTitle = this.closest('.book-card').querySelector('h4').textContent;
                     alert(`Книга "${bookTitle}" добавлена в корзину!`);
+                    
+                    // Анимация кнопки
+                    const originalText = this.textContent;
+                    this.textContent = 'Добавлено!';
+                    this.style.background = '#27ae60';
+                    
+                    setTimeout(() => {
+                        this.textContent = originalText;
+                        this.style.background = '';
+                    }, 2000);
+                });
+            });
+
+            // Обработка ошибок загрузки картинок
+            document.querySelectorAll('.book-cover').forEach(img => {
+                img.addEventListener('error', function() {
+                    console.log('Ошибка загрузки картинки:', this.src);
+                    const placeholder = document.createElement('div');
+                    placeholder.className = 'book-placeholder';
+                    placeholder.innerHTML = '📖';
+                    this.parentNode.replaceChild(placeholder, this);
                 });
             });
         });

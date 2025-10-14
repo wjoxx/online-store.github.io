@@ -133,12 +133,7 @@
         }
 
         .form-options {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             margin-bottom: 25px;
-            flex-wrap: wrap;
-            gap: 10px;
         }
 
         .checkbox {
@@ -187,6 +182,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             text-align: center;
+            font-size: 1rem;
         }
 
         .btn-primary {
@@ -201,3 +197,231 @@
             box-shadow: 0 5px 15px rgba(93, 64, 55, 0.3);
         }
 
+        .btn-full {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1rem;
+        }
+
+        footer {
+            background: #5d4037;
+            color: #d7ccc8;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: auto;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .main-nav {
+                flex-wrap: wrap;
+            }
+            
+            .nav-link {
+                padding: 12px 20px;
+                flex: 1;
+                text-align: center;
+                min-width: 120px;
+            }
+            
+            .auth-container {
+                margin: 20px;
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <h1>Книжный уголок</h1>
+                <p>Интернет-магазин</p>
+            </div>
+            <nav class="main-nav">
+                <a href="index.html" class="nav-link">Главная</a>
+                <a href="catalog.html" class="nav-link">Каталог</a>
+                <a href="login.html" class="nav-link">Вход</a>
+                <a href="register.html" class="nav-link active">Регистрация</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="auth-container">
+            <h2>Регистрация</h2>
+            <form class="auth-form" id="registerForm">
+                <div class="form-group">
+                    <label for="reg-name">Имя:</label>
+                    <input type="text" id="reg-name" placeholder="Введите ваше имя" required>
+                    <div class="error-message" id="name-error"></div>
+                </div>
+                <div class="form-group">
+                    <label for="reg-email">E-mail адрес:</label>
+                    <input type="email" id="reg-email" placeholder="you@email.com" required>
+                    <div class="error-message" id="email-error"></div>
+                </div>
+                <div class="form-group">
+                    <label for="reg-password">Пароль:</label>
+                    <input type="password" id="reg-password" placeholder="Введите ваш пароль" required>
+                    <div class="error-message" id="password-error"></div>
+                </div>
+                <div class="form-group">
+                    <label for="reg-confirm">Повторите пароль:</label>
+                    <input type="password" id="reg-confirm" placeholder="Повторите пароль" required>
+                    <div class="error-message" id="confirm-error"></div>
+                </div>
+                <div class="form-options">
+                    <label class="checkbox">
+                        <input type="checkbox" id="agreement" required>
+                        <span class="checkmark"></span>
+                        Принять условия соглашений
+                    </label>
+                    <div class="error-message" id="agreement-error"></div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Регистрация</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Книжный уголок</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('registerForm');
+            const nameInput = document.getElementById('reg-name');
+            const emailInput = document.getElementById('reg-email');
+            const passwordInput = document.getElementById('reg-password');
+            const confirmInput = document.getElementById('reg-confirm');
+            const agreementInput = document.getElementById('agreement');
+
+            // Функция для показа ошибки
+            function showError(inputId, message) {
+                const errorElement = document.getElementById(inputId + '-error');
+                errorElement.textContent = message;
+                errorElement.style.display = 'block';
+            }
+
+            // Функция для скрытия ошибки
+            function hideError(inputId) {
+                const errorElement = document.getElementById(inputId + '-error');
+                errorElement.style.display = 'none';
+            }
+
+            // Валидация в реальном времени
+            nameInput.addEventListener('input', function() {
+                if (nameInput.value.length < 2) {
+                    showError('name', 'Имя должно содержать минимум 2 символа');
+                } else {
+                    hideError('name');
+                }
+            });
+
+            emailInput.addEventListener('input', function() {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(emailInput.value)) {
+                    showError('email', 'Введите корректный email адрес');
+                } else {
+                    hideError('email');
+                }
+            });
+
+            passwordInput.addEventListener('input', function() {
+                if (passwordInput.value.length < 6) {
+                    showError('password', 'Пароль должен содержать минимум 6 символов');
+                } else {
+                    hideError('password');
+                }
+            });
+
+            confirmInput.addEventListener('input', function() {
+                if (confirmInput.value !== passwordInput.value) {
+                    showError('confirm', 'Пароли не совпадают');
+                } else {
+                    hideError('confirm');
+                }
+            });
+
+            // Обработка отправки формы
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                let isValid = true;
+
+                // Валидация имени
+                if (nameInput.value.length < 2) {
+                    showError('name', 'Имя должно содержать минимум 2 символа');
+                    isValid = false;
+                } else {
+                    hideError('name');
+                }
+
+                // Валидация email
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(emailInput.value)) {
+                    showError('email', 'Введите корректный email адрес');
+                    isValid = false;
+                } else {
+                    hideError('email');
+                }
+
+                // Валидация пароля
+                if (passwordInput.value.length < 6) {
+                    showError('password', 'Пароль должен содержать минимум 6 символов');
+                    isValid = false;
+                } else {
+                    hideError('password');
+                }
+
+                // Проверка совпадения паролей
+                if (confirmInput.value !== passwordInput.value) {
+                    showError('confirm', 'Пароли не совпадают');
+                    isValid = false;
+                } else {
+                    hideError('confirm');
+                }
+
+                // Проверка соглашения
+                if (!agreementInput.checked) {
+                    showError('agreement', 'Необходимо принять условия соглашения');
+                    isValid = false;
+                } else {
+                    hideError('agreement');
+                }
+
+                // Если все проверки пройдены
+                if (isValid) {
+                    // Сохраняем данные (в реальном приложении здесь был бы запрос к серверу)
+                    const userData = {
+                        name: nameInput.value,
+                        email: emailInput.value,
+                        password: passwordInput.value
+                    };
+                    
+                    localStorage.setItem('userData', JSON.stringify(userData));
+                    
+                    alert('Регистрация завершена успешно! Теперь вы можете войти в систему.');
+                    window.location.href = 'login.html';
+                }
+            });
+
+            // Обработка клика по чекбоксу
+            agreementInput.addEventListener('change', function() {
+                if (this.checked) {
+                    hideError('agreement');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

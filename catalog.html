@@ -3,96 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Каталог книг | Книжный магазин</title>
+    <title>Книжный уголок | Каталог</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <!-- Шапка -->
     <header>
-        <div class="container header-content">
-            <div class="logo">Книжный уголок</div>
-            <nav>
-                <ul>
-                    <li><a href="index.html" class="nav-link">Главная</a></li>
-                    <li><a href="catalog.html" class="nav-link active">Каталог</a></li>
-                </ul>
-            </nav>
-            <div class="auth-buttons">
-                <a href="login.html" class="btn btn-login">Вход</a>
-                <a href="register.html" class="btn btn-register">Регистрация</a>
+        <div class="container">
+            <div class="header-top">
+                <h1>Книжный уголок</h1>
+                <p>Интернет-магазин</p>
             </div>
+            <nav class="main-nav">
+                <a href="index.html" class="nav-link">Главная</a>
+                <a href="catalog.html" class="nav-link active">Каталог</a>
+                <a href="login.html" class="nav-link">Вход</a>
+                <a href="register.html" class="nav-link">Регистрация</a>
+            </nav>
         </div>
     </header>
 
-    <!-- Каталог -->
-    <main>
-        <section class="catalog">
-            <div class="container">
-                <h2 class="section-title">Каталог книг</h2>
-                
-                <div class="filters">
-                    <input type="text" class="search-box" placeholder="Поиск по названию или автору...">
-                    <select class="filter-select" id="genre-filter">
-                        <option value="">Все жанры</option>
-                        <option value="fiction">Художественная литература</option>
-                        <option value="nonfiction">Нехудожественная литература</option>
-                        <option value="fantasy">Фэнтези</option>
-                        <option value="scifi">Научная фантастика</option>
-                        <option value="detective">Детективы</option>
-                        <option value="romance">Романтика</option>
-                    </select>
-                    <select class="filter-select" id="price-filter">
-                        <option value="">Любая цена</option>
-                        <option value="0-500">до 500 руб.</option>
-                        <option value="500-1000">500-1000 руб.</option>
-                        <option value="1000+">свыше 1000 руб.</option>
-                    </select>
-                </div>
-                
-                <div class="books-grid" id="books-grid">
-                    <!-- Книги будут загружены через JavaScript -->
-                </div>
+    <main class="container">
+        <div class="catalog-header">
+            <h2>Каталог книг</h2>
+            <div class="filters">
+                <select class="filter-select">
+                    <option>Все категории</option>
+                    <option>Художественная литература</option>
+                    <option>Фэнтези</option>
+                    <option>Детективы</option>
+                    <option>Научная фантастика</option>
+                    <option>Романы</option>
+                    <option>Бизнес-литература</option>
+                </select>
+                <select class="filter-select">
+                    <option>По популярности</option>
+                    <option>По цене (возрастание)</option>
+                    <option>По цене (убывание)</option>
+                    <option>По названию</option>
+                </select>
             </div>
-        </section>
+        </div>
+
+        <div class="categories">
+            <h3>Категории</h3>
+            <div class="category-tags">
+                <span class="category-tag active">Все книги</span>
+                <span class="category-tag">Художественная литература</span>
+                <span class="category-tag">Фэнтези</span>
+                <span class="category-tag">Детективы</span>
+                <span class="category-tag">Научная фантастика</span>
+                <span class="category-tag">Романы</span>
+                <span class="category-tag">Бизнес-литература</span>
+            </div>
+        </div>
+
+        <div class="books-grid catalog-grid">
+            <!-- Книги будут загружены через JavaScript -->
+        </div>
     </main>
 
-    <!-- Подвал -->
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Книжный уголок</h3>
-                    <p>Ваш надежный партнер в мире литературы с 2010 года.</p>
-                </div>
-                <div class="footer-column">
-                    <h3>Категории</h3>
-                    <ul>
-                        <li><a href="catalog.html">Художественная литература</a></li>
-                        <li><a href="catalog.html">Научная фантастика</a></li>
-                        <li><a href="catalog.html">Детективы</a></li>
-                        <li><a href="catalog.html">Фэнтези</a></li>
-                        <li><a href="catalog.html">Бизнес-литература</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Помощь</h3>
-                    <ul>
-                        <li><a href="#">Доставка и оплата</a></li>
-                        <li><a href="#">Возврат товара</a></li>
-                        <li><a href="#">Частые вопросы</a></li>
-                        <li><a href="#">Контакты</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Контакты</h3>
-                    <ul>
-                        <li>Телефон: +7 (999) 123-45-67</li>
-                        <li>Email: info@bookcorner.ru</li>
-                        <li>Адрес: г. Москва, ул. Книжная, д. 15</li>
-                    </ul>
-                </div>
-            </div>
-           
+            <p>&copy; 2025 Книжный уголок</p>
         </div>
     </footer>
 

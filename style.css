@@ -1,404 +1,419 @@
-
+/* Общие стили */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-    background-color: #f5f5f5;
-    color: #333;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #fefefe;
+    color: #5d4037;
     line-height: 1.6;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
-}
-
-main {
-    flex: 1;
 }
 
 .container {
-    width: 90%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 15px;
+    padding: 0 20px;
 }
 
 /* Шапка */
 header {
-    background-color: #2c3e50;
+    background: #5d4037;
     color: white;
-    padding: 1rem 0;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-bottom: 3px solid #8d6e63;
 }
 
-.header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #e74c3c;
-}
-
-nav ul {
-    display: flex;
-    list-style: none;
-}
-
-nav ul li {
-    margin-left: 1.5rem;
-}
-
-nav ul li a {
-    color: white;
-    text-decoration: none;
-    transition: color 0.3s;
-    font-weight: 500;
-    padding: 5px 10px;
-    border-radius: 4px;
-}
-
-nav ul li a:hover,
-nav ul li a.active {
-    color: #e74c3c;
-    background-color: rgba(255,255,255,0.1);
-}
-
-.auth-buttons {
-    display: flex;
-    gap: 10px;
-}
-
-.btn {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: all 0.3s;
-    text-decoration: none;
-    display: inline-block;
+.header-top {
+    padding: 20px 0 10px;
     text-align: center;
 }
 
-.btn-login {
-    background-color: transparent;
-    color: white;
-    border: 1px solid white;
+.header-top h1 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin-bottom: 5px;
 }
 
-.btn-register {
-    background-color: #e74c3c;
-    color: white;
-}
-
-.btn-login.active,
-.btn-register.active {
-    background-color: #e74c3c;
-    border-color: #e74c3c;
-}
-
-.btn:hover {
+.header-top p {
+    font-size: 1rem;
     opacity: 0.9;
-    transform: translateY(-2px);
+    font-weight: 300;
 }
 
-/* Главная страница */
-.hero {
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://source.unsplash.com/random/1200x600/?books,library');
-    background-size: cover;
-    background-position: center;
+.main-nav {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    background: #4e342e;
+    border-top: 1px solid #6d4c41;
+}
+
+.nav-link {
+    padding: 15px 30px;
     color: white;
-    padding: 5rem 0;
-    text-align: center;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border-bottom: 3px solid transparent;
 }
 
-.hero h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
+.nav-link:hover {
+    background: #6d4c41;
+}
+
+.nav-link.active {
+    background: #8d6e63;
+    border-bottom-color: #d7ccc8;
+}
+
+/* Основной контент */
+main {
+    flex: 1;
+    padding: 40px 0;
+}
+
+/* Герой-секция */
+.hero {
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(135deg, #efebe9 0%, #d7ccc8 100%);
+    border-radius: 10px;
+    margin-bottom: 40px;
+}
+
+.hero h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #4e342e;
+    font-weight: 300;
 }
 
 .hero p {
     font-size: 1.2rem;
-    max-width: 700px;
-    margin: 0 auto 2rem;
+    margin-bottom: 30px;
+    color: #6d4c41;
 }
 
-.btn-hero {
-    background-color: #e74c3c;
-    color: white;
+/* Кнопки */
+.btn {
+    display: inline-block;
     padding: 12px 30px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.btn-primary {
+    background: #6d4c41;
+    color: white;
+    border: 2px solid #6d4c41;
+}
+
+.btn-primary:hover {
+    background: #5d4037;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(93, 64, 55, 0.3);
+}
+
+.btn-full {
+    width: 100%;
+    padding: 15px;
     font-size: 1.1rem;
 }
 
-.features {
-    padding: 4rem 0;
-    background-color: white;
+.btn-cart {
+    background: #8d6e63;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 10px;
 }
 
-.section-title {
-    text-align: center;
-    margin-bottom: 3rem;
-    font-size: 2rem;
-    color: #2c3e50;
+.btn-cart:hover {
+    background: #6d4c41;
 }
 
-.features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-}
-
-.feature-card {
-    text-align: center;
-    padding: 2rem 1rem;
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    transition: transform 0.3s;
-}
-
-.feature-card:hover {
-    transform: translateY(-10px);
-}
-
-.feature-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    color: #e74c3c;
-}
-
-/* Каталог */
-.catalog {
-    padding: 4rem 0;
-}
-
-.filters {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
-    gap: 15px;
-}
-
-.search-box {
-    flex: 1;
-    min-width: 300px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 1rem;
-}
-
-.filter-select {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    background-color: white;
-    font-size: 1rem;
-}
-
+/* Сетка книг */
 .books-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
 }
 
 .book-card {
-    background-color: white;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    transition: transform 0.3s;
+    background: white;
+    border: 1px solid #d7ccc8;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(93, 64, 55, 0.1);
 }
 
 .book-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(93, 64, 55, 0.2);
 }
 
 .book-image {
-    height: 300px;
-    background-color: #f1f1f1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     font-size: 4rem;
-    color: #2c3e50;
+    margin-bottom: 15px;
+    color: #8d6e63;
 }
 
-.book-info {
-    padding: 1.5rem;
-}
-
-.book-title {
+.book-info h4 {
     font-size: 1.2rem;
-    margin-bottom: 0.5rem;
-    height: 3rem;
-    overflow: hidden;
+    margin-bottom: 8px;
+    color: #4e342e;
+    font-weight: 500;
 }
 
-.book-author {
-    color: #666;
-    margin-bottom: 1rem;
+.book-info p {
+    color: #8d6e63;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
 }
 
-.book-price {
+.price {
     font-size: 1.3rem;
-    font-weight: bold;
-    color: #e74c3c;
-    margin-bottom: 1rem;
+    font-weight: 600;
+    color: #5d4037;
+    margin: 15px 0;
 }
 
-.btn-buy {
-    background-color: #2c3e50;
-    color: white;
-    width: 100%;
-    padding: 10px;
-}
-
-/* Формы */
-.auth-section {
-    padding: 4rem 0;
-    background-color: white;
-    min-height: 80vh;
+/* Каталог */
+.catalog-header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
+.catalog-header h2 {
+    font-size: 2rem;
+    color: #4e342e;
+    font-weight: 300;
+}
+
+.filters {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.filter-select {
+    padding: 10px 15px;
+    border: 1px solid #d7ccc8;
+    border-radius: 5px;
+    background: white;
+    color: #5d4037;
+    font-size: 0.9rem;
+    min-width: 200px;
+}
+
+.categories {
+    margin-bottom: 30px;
+}
+
+.categories h3 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    color: #4e342e;
+    font-weight: 400;
+}
+
+.category-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.category-tag {
+    padding: 8px 16px;
+    background: #efebe9;
+    border: 1px solid #d7ccc8;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.category-tag:hover,
+.category-tag.active {
+    background: #6d4c41;
+    color: white;
+    border-color: #6d4c41;
+}
+
+.catalog-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+/* Формы авторизации */
 .auth-container {
-    max-width: 500px;
+    max-width: 400px;
     margin: 0 auto;
-    padding: 2rem;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    border-radius: 8px;
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(93, 64, 55, 0.1);
+    border: 1px solid #d7ccc8;
 }
 
-.auth-title {
+.auth-container h2 {
     text-align: center;
-    margin-bottom: 2rem;
-    color: #2c3e50;
+    margin-bottom: 30px;
+    color: #4e342e;
+    font-weight: 300;
+    font-size: 1.8rem;
+}
+
+.auth-form {
+    width: 100%;
 }
 
 .form-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 20px;
 }
 
-.form-label {
+.form-group label {
     display: block;
-    margin-bottom: 0.5rem;
+    margin-bottom: 8px;
+    color: #5d4037;
     font-weight: 500;
 }
 
-.form-input {
+.form-group input {
     width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    padding: 12px 15px;
+    border: 1px solid #d7ccc8;
+    border-radius: 5px;
     font-size: 1rem;
-    transition: border-color 0.3s;
+    transition: border-color 0.3s ease;
 }
 
-.form-input:focus {
+.form-group input:focus {
     outline: none;
-    border-color: #e74c3c;
+    border-color: #8d6e63;
+    box-shadow: 0 0 0 2px rgba(141, 110, 99, 0.2);
 }
 
-.btn-submit {
-    background-color: #e74c3c;
-    color: white;
-    width: 100%;
-    padding: 12px;
-    font-size: 1.1rem;
-    border: none;
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
     cursor: pointer;
+    font-size: 0.9rem;
 }
 
-.auth-link {
-    text-align: center;
-    margin-top: 1.5rem;
+.checkbox input {
+    display: none;
 }
 
-.auth-link a {
-    color: #e74c3c;
+.checkmark {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #8d6e63;
+    border-radius: 3px;
+    margin-right: 8px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.checkbox input:checked + .checkmark {
+    background: #6d4c41;
+    border-color: #6d4c41;
+}
+
+.checkbox input:checked + .checkmark::after {
+    content: '✓';
+    position: absolute;
+    color: white;
+    font-size: 14px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.forgot-password {
+    color: #8d6e63;
     text-decoration: none;
-    font-weight: 500;
+    font-size: 0.9rem;
 }
 
-.auth-link a:hover {
+.forgot-password:hover {
+    color: #5d4037;
     text-decoration: underline;
 }
 
 /* Подвал */
 footer {
-    background-color: #2c3e50;
-    color: white;
-    padding: 3rem 0 1rem;
-    margin-top: auto;
-}
-
-.footer-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2rem;
-    margin-bottom: 2rem;
-}
-
-.footer-column h3 {
-    margin-bottom: 1.5rem;
-    font-size: 1.2rem;
-}
-
-.footer-column ul {
-    list-style: none;
-}
-
-.footer-column ul li {
-    margin-bottom: 0.8rem;
-}
-
-.footer-column ul li a {
-    color: #ddd;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-.footer-column ul li a:hover {
-    color: #e74c3c;
-}
-
-.copyright {
+    background: #5d4037;
+    color: #d7ccc8;
     text-align: center;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    color: #aaa;
+    padding: 20px 0;
+    margin-top: auto;
 }
 
 /* Адаптивность */
 @media (max-width: 768px) {
-    .header-content {
+    .main-nav {
+        flex-wrap: wrap;
+    }
+    
+    .nav-link {
+        padding: 12px 20px;
+        flex: 1;
+        text-align: center;
+        min-width: 120px;
+    }
+    
+    .catalog-header {
         flex-direction: column;
-        gap: 15px;
-    }
-    
-    nav ul {
-        margin-top: 15px;
-    }
-    
-    .hero h1 {
-        font-size: 2.2rem;
+        align-items: flex-start;
     }
     
     .filters {
-        flex-direction: column;
+        width: 100%;
     }
     
-    .auth-buttons {
-        width: 100%;
-        justify-content: center;
+    .filter-select {
+        min-width: 150px;
+        flex: 1;
+    }
+    
+    .auth-container {
+        margin: 20px;
+        padding: 30px 20px;
+    }
+    
+    .hero h2 {
+        font-size: 2rem;
+    }
+    
+    .hero p {
+        font-size: 1rem;
     }
 }

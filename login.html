@@ -3,89 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Вход | Книжный магазин</title>
+    <title>Книжный уголок | Вход</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <!-- Шапка -->
     <header>
-        <div class="container header-content">
-            <div class="logo">Книжный уголок</div>
-            <nav>
-                <ul>
-                    <li><a href="index.html" class="nav-link">Главная</a></li>
-                    <li><a href="catalog.html" class="nav-link">Каталог</a></li>
-                </ul>
-            </nav>
-            <div class="auth-buttons">
-                <a href="login.html" class="btn btn-login active">Вход</a>
-                <a href="register.html" class="btn btn-register">Регистрация</a>
+        <div class="container">
+            <div class="header-top">
+                <h1>Книжный уголок</h1>
+                <p>Интернет-магазин</p>
             </div>
+            <nav class="main-nav">
+                <a href="index.html" class="nav-link">Главная</a>
+                <a href="catalog.html" class="nav-link">Каталог</a>
+                <a href="login.html" class="nav-link active">Вход</a>
+                <a href="register.html" class="nav-link">Регистрация</a>
+            </nav>
         </div>
     </header>
 
-    <!-- Страница входа -->
-    <main>
-        <section class="auth-section">
-            <div class="container">
-                <div class="auth-container">
-                    <h2 class="auth-title">Вход в аккаунт</h2>
-                    <form id="login-form">
-                        <div class="form-group">
-                            <label class="form-label" for="login-email">Email</label>
-                            <input type="email" class="form-input" id="login-email" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" for="login-password">Пароль</label>
-                            <input type="password" class="form-input" id="login-password" required>
-                        </div>
-                        <button type="submit" class="btn btn-submit">Войти</button>
-                    </form>
-                    <div class="auth-link">
-                        <p>Нет аккаунта? <a href="register.html">Зарегистрироваться</a></p>
-                    </div>
+    <main class="container">
+        <div class="auth-container">
+            <h2>Вход</h2>
+            <form class="auth-form" id="loginForm">
+                <div class="form-group">
+                    <label for="email">E-mail адрес:</label>
+                    <input type="email" id="email" placeholder="your@email.com" required>
                 </div>
-            </div>
-        </section>
+                <div class="form-group">
+                    <label for="password">Пароль:</label>
+                    <input type="password" id="password" placeholder="Введите ваш пароль" required>
+                </div>
+                <div class="form-options">
+                    <label class="checkbox">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        Запомнить меня
+                    </label>
+                    <a href="#" class="forgot-password">Забыли пароль?</a>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">Войти в аккаунт</button>
+            </form>
+        </div>
     </main>
 
-    <!-- Подвал -->
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Книжный уголок</h3>
-                    <p>Ваш надежный партнер в мире литературы с 2010 года.</p>
-                </div>
-                <div class="footer-column">
-                    <h3>Категории</h3>
-                    <ul>
-                        <li><a href="catalog.html">Художественная литература</a></li>
-                        <li><a href="catalog.html">Научная фантастика</a></li>
-                        <li><a href="catalog.html">Детективы</a></li>
-                        <li><a href="catalog.html">Фэнтези</a></li>
-                        <li><a href="catalog.html">Бизнес-литература</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Помощь</h3>
-                    <ul>
-                        <li><a href="#">Доставка и оплата</a></li>
-                        <li><a href="#">Возврат товара</a></li>
-                        <li><a href="#">Частые вопросы</a></li>
-                        <li><a href="#">Контакты</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Контакты</h3>
-                    <ul>
-                        <li>Телефон: +7 (999) 123-45-67</li>
-                        <li>Email: info@bookcorner.ru</li>
-                        <li>Адрес: г. Москва, ул. Книжная, д. 15</li>
-                    </ul>
-                </div>
-            </div>
-           
+            <p>&copy; 2025 Книжный уголок</p>
         </div>
     </footer>
 

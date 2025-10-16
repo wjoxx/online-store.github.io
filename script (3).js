@@ -4,7 +4,7 @@ const books = [
         id: 1,
         title: "Мастер и Маргарита",
         author: "Михаил Булгаков",
-        price: 650,
+        price: 400,
         category: "fiction",
         rating: 4.8,
         reviews: 127
@@ -13,7 +13,7 @@ const books = [
         id: 2,
         title: "1984",
         author: "Джордж Оруэлл",
-        price: 580,
+        price: 350,
         category: "scifi",
         rating: 4.7,
         reviews: 89
@@ -22,7 +22,7 @@ const books = [
         id: 3,
         title: "Преступление и наказание",
         author: "Фёдор Достоевский",
-        price: 720,
+        price: 380,
         category: "fiction",
         rating: 4.9,
         reviews: 156
@@ -31,7 +31,7 @@ const books = [
         id: 4,
         title: "Маленький принц",
         author: "Антуан де Сент-Экзюпери",
-        price: 450,
+        price: 378,
         category: "fiction",
         rating: 4.8,
         reviews: 203
@@ -40,7 +40,7 @@ const books = [
         id: 5,
         title: "Если все кошки в мире исчезнут",
         author: "Гэнки Кавамура",
-        price: 890,
+        price: 388,
         category: "fantasy",
         rating: 4.9,
         reviews: 345

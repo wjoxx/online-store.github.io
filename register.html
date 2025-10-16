@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Книжный уголок | Регистрация</title>
+    <title>Storyteller's corner | Регистрация</title>
     <style>
         * {
             margin: 0;
@@ -241,7 +241,7 @@
     <header>
         <div class="container">
             <div class="header-top">
-                <h1>Книжный уголок</h1>
+                <h1>Storyteller's corner</h1>
                 <p>Интернет-магазин</p>
             </div>
             <nav class="main-nav">
@@ -264,7 +264,7 @@
                 </div>
                 <div class="form-group">
                     <label for="reg-email">E-mail адрес:</label>
-                    <input type="email" id="reg-email" placeholder="you@email.com" required>
+                    <input type="email" id="reg-email" placeholder="Введите ваш email" required>
                     <div class="error-message" id="email-error"></div>
                 </div>
                 <div class="form-group">
@@ -292,7 +292,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Книжный уголок</p>
+            <p>&copy; 2025 Storyteller's corner</p>
         </div>
     </footer>
 
@@ -305,20 +305,17 @@
             const confirmInput = document.getElementById('reg-confirm');
             const agreementInput = document.getElementById('agreement');
 
-            // Функция для показа ошибки
             function showError(inputId, message) {
                 const errorElement = document.getElementById(inputId + '-error');
                 errorElement.textContent = message;
                 errorElement.style.display = 'block';
             }
 
-            // Функция для скрытия ошибки
             function hideError(inputId) {
                 const errorElement = document.getElementById(inputId + '-error');
                 errorElement.style.display = 'none';
             }
 
-            // Валидация в реальном времени
             nameInput.addEventListener('input', function() {
                 if (nameInput.value.length < 2) {
                     showError('name', 'Имя должно содержать минимум 2 символа');
@@ -352,13 +349,11 @@
                 }
             });
 
-            // Обработка отправки формы
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
                 
                 let isValid = true;
 
-                // Валидация имени
                 if (nameInput.value.length < 2) {
                     showError('name', 'Имя должно содержать минимум 2 символа');
                     isValid = false;
@@ -366,7 +361,6 @@
                     hideError('name');
                 }
 
-                // Валидация email
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 if (!emailRegex.test(emailInput.value)) {
                     showError('email', 'Введите корректный email адрес');
@@ -375,7 +369,6 @@
                     hideError('email');
                 }
 
-                // Валидация пароля
                 if (passwordInput.value.length < 6) {
                     showError('password', 'Пароль должен содержать минимум 6 символов');
                     isValid = false;
@@ -383,7 +376,6 @@
                     hideError('password');
                 }
 
-                // Проверка совпадения паролей
                 if (confirmInput.value !== passwordInput.value) {
                     showError('confirm', 'Пароли не совпадают');
                     isValid = false;
@@ -391,7 +383,6 @@
                     hideError('confirm');
                 }
 
-                // Проверка соглашения
                 if (!agreementInput.checked) {
                     showError('agreement', 'Необходимо принять условия соглашения');
                     isValid = false;
@@ -399,7 +390,6 @@
                     hideError('agreement');
                 }
 
-                // Если все проверки пройдены
                 if (isValid) {
                     // Сохраняем данные (в реальном приложении здесь был бы запрос к серверу)
                     const userData = {
@@ -415,7 +405,6 @@
                 }
             });
 
-            // Обработка клика по чекбоксу
             agreementInput.addEventListener('change', function() {
                 if (this.checked) {
                     hideError('agreement');

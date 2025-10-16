@@ -38,40 +38,13 @@ const books = [
     },
     {
         id: 5,
-        title: "Гарри Поттер и философский камень",
-        author: "Дж. К. Роулинг",
+        title: "Если все кошки в мире исчезнут",
+        author: "Гэнки Кавамура",
         price: 890,
         category: "fantasy",
         rating: 4.9,
         reviews: 345
     },
-    {
-        id: 6,
-        title: "Властелин колец: Братство кольца",
-        author: "Дж. Р. Р. Толкин",
-        price: 950,
-        category: "fantasy",
-        rating: 4.8,
-        reviews: 278
-    },
-    {
-        id: 7,
-        title: "Убийство в Восточном экспрессе",
-        author: "Агата Кристи",
-        price: 520,
-        category: "detective",
-        rating: 4.6,
-        reviews: 94
-    },
-    {
-        id: 8,
-        title: "Гордость и предубеждение",
-        author: "Джейн Остин",
-        price: 480,
-        category: "romance",
-        rating: 4.7,
-        reviews: 167
-    }
 ];
 
 // Инициализация при загрузке страницы

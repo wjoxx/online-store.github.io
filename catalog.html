@@ -489,6 +489,24 @@
             }
         }
 
+        function sortBooks() {
+            const sortBy = document.querySelectorAll('.filter-select')[1].value;
+            let sortedBooks = [...books];
+            
+            switch (sortBy) {
+                case 'По цене (возрастание)':
+                    sortedBooks.sort((a, b) => a.price - b.price);
+                    break;
+                case 'По цене (убывание)':
+                    sortedBooks.sort((a, b) => b.price - a.price);
+                    break;
+                case 'По названию':
+                    sortedBooks.sort((a, b) => a.title.localeCompare(b.title));
+                    break;
+                default:
+                    // По популярности (только по рейтингу)
+                    sortedBooks.sort((a, b) => b.rating - a.rating);
+            }
             
             loadBooks(sortedBooks);
         }

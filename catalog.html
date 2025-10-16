@@ -504,7 +504,6 @@
                     sortedBooks.sort((a, b) => a.title.localeCompare(b.title));
                     break;
                 default:
-                    // По популярности (только по рейтингу)
                     sortedBooks.sort((a, b) => b.rating - a.rating);
             }
             

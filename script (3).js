@@ -47,15 +47,12 @@ const books = [
     },
 ];
 
-// Инициализация при загрузке страницы
 document.addEventListener('DOMContentLoaded', function() {
-    // Загрузка каталога книг
     if (document.querySelector('.catalog-grid')) {
         loadCatalogBooks();
         setupCatalogFilters();
     }
-    
-    // Обработка форм
+
     const loginForm = document.getElementById('loginForm');
     if (loginForm) {
         loginForm.addEventListener('submit', handleLogin);
@@ -65,8 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (registerForm) {
         registerForm.addEventListener('submit', handleRegister);
     }
-    
-    // Обработка кнопок "В корзину"
+
     document.addEventListener('click', function(e) {
         if (e.target.classList.contains('btn-cart')) {
             e.preventDefault();
@@ -77,7 +73,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Загрузка книг в каталог
 function loadCatalogBooks(booksToLoad = books) {
     const booksGrid = document.querySelector('.catalog-grid');
     if (!booksGrid) return;
@@ -104,7 +99,6 @@ function loadCatalogBooks(booksToLoad = books) {
     });
 }
 
-// Настройка фильтров каталога
 function setupCatalogFilters() {
     const categoryTags = document.querySelectorAll('.category-tag');
     const sortSelect = document.querySelector('.filter-select');
@@ -122,7 +116,6 @@ function setupCatalogFilters() {
     }
 }
 
-// Фильтрация книг
 function filterBooks() {
     const activeCategory = document.querySelector('.category-tag.active').textContent;
     
@@ -144,7 +137,6 @@ function filterBooks() {
     }
 }
 
-// Сортировка книг
 function sortBooks() {
     const sortBy = document.querySelector('.filter-select').value;
     let sortedBooks = [...books];
@@ -167,17 +159,12 @@ function sortBooks() {
     loadCatalogBooks(sortedBooks);
 }
 
-// Добавление в корзину
 function addToCart(bookTitle) {
-    // В реальном приложении здесь будет логика добавления в корзину
     alert(`Книга "${bookTitle}" добавлена в корзину!`);
-    
-    // Можно добавить анимацию
     const event = new CustomEvent('cartUpdate', { detail: { book: bookTitle } });
     document.dispatchEvent(event);
 }
 
-// Обработка входа
 function handleLogin(e) {
     e.preventDefault();
     const email = document.getElementById('email').value;
@@ -185,14 +172,12 @@ function handleLogin(e) {
     
     if (email && password) {
         alert('Вход выполнен успешно!');
-        // В реальном приложении здесь будет перенаправление
         window.location.href = 'index.html';
     } else {
         alert('Пожалуйста, заполните все поля');
     }
 }
 
-// Обработка регистрации
 function handleRegister(e) {
     e.preventDefault();
     const email = document.getElementById('reg-email').value;

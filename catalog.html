@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Книжный уголок | Каталог</title>
+    <title>Storyteller's corner | Каталог</title>
     <style>
         * {
             margin: 0;
@@ -245,8 +245,6 @@
             padding: 20px 0;
             margin-top: auto;
         }
-
-        /* Стили для случаев, когда картинки не загружаются */
         .book-placeholder {
             width: 200px;
             height: 300px;
@@ -297,7 +295,7 @@
     <header>
         <div class="container">
             <div class="header-top">
-                <h1>Книжный уголок</h1>
+                <h1>Storyteller's corner</h1>
                 <p>Интернет-магазин</p>
             </div>
             <nav class="main-nav">
@@ -343,25 +341,21 @@
                 <span class="category-tag">Бизнес-литература</span>
             </div>
         </div>
-
         <div class="books-grid catalog-grid" id="booksGrid">
-            <!-- Книги загружаются через JavaScript -->
         </div>
     </main>
-
     <footer>
         <div class="container">
             <p>&copy; 2025 Книжный уголок</p>
         </div>
     </footer>
-
     <script>
         const books = [
             {
                 id: 1,
                 title: "Мастер и Маргарита",
                 author: "Михаил Булгаков",
-                price: 650,
+                price: 400,
                 category: "fiction",
                 rating: 4.8,
                 image: "images/мастеримаргарита.webp"
@@ -370,7 +364,7 @@
                 id: 2,
                 title: "1984",
                 author: "Джордж Оруэлл",
-                price: 580,
+                price: 350,
                 category: "scifi",
                 rating: 4.7,
                 image: "images/1984.jpg"
@@ -379,7 +373,7 @@
                 id: 3,
                 title: "Преступление и наказание",
                 author: "Фёдор Достоевский",
-                price: 720,
+                price: 380,
                 category: "fiction",
                 rating: 4.9,
                 image: "images/преступлениеинаказание.png"
@@ -388,7 +382,7 @@
                 id: 4,
                 title: "Маленький принц",
                 author: "Антуан де Сент-Экзюпери",
-                price: 450,
+                price: 378,
                 category: "fiction",
                 rating: 4.8,
                 image: "images/маленькийпринц.webp"
@@ -397,7 +391,7 @@
                 id: 5,
                 title: "Если все кошки в мире исчезнут",
                 author: "Гэнки Кавамура",
-                price: 520,
+                price: 388,
                 category: "romance",
                 rating: 4.6,
                 image: "images/есливсекошкивмиреисчезнут.webp"
@@ -450,26 +444,19 @@
                 `;
                 booksGrid.appendChild(bookCard);
             });
-
-            // Добавляем обработчики для новых кнопок
             document.querySelectorAll('.btn-cart').forEach(button => {
                 button.addEventListener('click', function() {
                     const bookTitle = this.closest('.book-card').querySelector('h4').textContent;
                     alert(`Книга "${bookTitle}" добавлена в корзину!`);
-                    
-                    // Анимация кнопки
                     const originalText = this.textContent;
                     this.textContent = 'Добавлено!';
                     this.style.background = '#27ae60';
-                    
                     setTimeout(() => {
                         this.textContent = originalText;
                         this.style.background = '';
                     }, 2000);
                 });
             });
-
-            // Обработка ошибок загрузки картинок
             document.querySelectorAll('.book-cover').forEach(img => {
                 img.addEventListener('error', function() {
                     console.log('Ошибка загрузки картинки:', this.src);
@@ -502,24 +489,6 @@
             }
         }
 
-        function sortBooks() {
-            const sortBy = document.querySelectorAll('.filter-select')[1].value;
-            let sortedBooks = [...books];
-            
-            switch (sortBy) {
-                case 'По цене (возрастание)':
-                    sortedBooks.sort((a, b) => a.price - b.price);
-                    break;
-                case 'По цене (убывание)':
-                    sortedBooks.sort((a, b) => b.price - a.price);
-                    break;
-                case 'По названию':
-                    sortedBooks.sort((a, b) => a.title.localeCompare(b.title));
-                    break;
-                default:
-                    // По популярности (только по рейтингу)
-                    sortedBooks.sort((a, b) => b.rating - a.rating);
-            }
             
             loadBooks(sortedBooks);
         }
